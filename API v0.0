@@ -1,0 +1,145 @@
+/api/v0
+
+v0.0
+2016.4.18
+
+
+约定：用户名长度是 4 到 20 个仅由
+A-Z
+a-z
+0-9
+-_.
+构成的串，且必须开始于
+A-Z
+a-z
+_
+不能结束于
+.-
+
+约定：用户的 screen name 的长度是 1 到 20 个字符
+不能开始于空白字符、不能结束于空白字符
+ 
+约定：密码至少有 6 位
+
+
+客户端类 (所有参数为“包括，但不限于此”！)
+
+
+user/signup
+	提供属性 {string: user_name, string: password}
+	返回 {int: error_code, string: user}
+	
+session/create
+	提供属性 {string: user_name, string: password, guid: client}
+	返回 {int: error_code, string: user, guid: session}
+
+session/extend
+	提供属性 {guid: session}
+	返回 {int: error_code}
+
+
+user/basic_info/get
+	提供属性 {guid: session, guid: user}
+	返回 {int: error_code, string?: real_name, string?: mobile_phone, enum?: gender, string?: bio, date?: birthday,
+		object?: industry {string: industry1_friendlyname, string: industry2_friendlyname},
+		object?: city {string: city_friendlyname} }
+
+user/basic_info/set
+	提供属性 {guid: session, string: real_name, string: mobile_phone, enum: gender, string: bio, date: birthday,
+		guid: industry1, guid: industry2, guid: city}
+	返回 {int: error_code}
+
+
+
+user/eduex/get
+	提供属性 {guid: session, guid: user}
+	返回 {int: error_code, array: eduex [object: {string: friendlyname,
+		string: school_friendlyname, int: entrance_year, string: comment}] }
+
+user/eduex/add
+	提供属性 {guid: session, guid: eduex, guid: school, int: entrance_year, string: comment}
+	返回 {int: error_code}
+
+user/eduex/remove
+	提供属性 {guid: session, guid: eduex, guid: school}
+	返回 {int: error_code}
+
+
+
+activities/all [Get Method]
+	返回 {int: error_code, array: activities [object: {guid: id, datetime: start, datetime: end, string: start_tz, string: end_tz,
+		string: title, string: location, string: description, datetime: date_created} ] }
+
+activities/mine
+	提供属性 {guid: session}
+	返回 {int: error_code, array: activities [object: {guid: id} ] }
+
+activities/join
+	提供属性 {guid: session, guid: activity}
+	返回 {int: error_code}
+
+activities/quit
+	提供属性 {guid: session, guid: activity}
+	返回 {int: error_code}
+
+
+
+matches/activity_based
+	提供属性 {guid: session, guid: activity}
+	返回 {int: error_code, array: persons [object: {guid: user, string?: real_name} ] }
+
+matches/general
+	提供属性 {guid: session}
+	返回 {int: error_code, array: persons [object: {guid: user, string?: real_name} ] }
+
+
+
+chat/send
+	提供属性 {guid: session, guid: to, guid: type, string: content}
+	返回 {int: error_code}
+
+chat/older/with, chat/newer/with
+	提供属性 {guid: session, guid: with, datetime: at}
+	返回 {int: error_code, array: messages [object: {guid: id, guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
+
+chat/older/all, chat/newer/all
+	提供属性 {guid: session, datetime: at}
+	返回 {int: error_code, array: messages [object: {guid: id, guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
+
+
+
+blocklist/blockees
+	提供属性 {guid: session}
+	返回 {int: error_code, array: blockees, object: {guid: user, string: real_name} }
+
+blocklist/block
+	提供属性 {guid: session, guid: blockee}
+	返回 {int: error_code}
+
+blocklist/unblock
+	提供属性 {guid: session, guid: blockee}
+	返回 {int: error_code}
+
+
+
+
+
+
+eduex/types [Get Method]
+	返回 {int: error_code, array: types [object: {guid: id, string: friendlyname} ] }
+
+eduex/schools
+	提供属性 {guid: eduex_id}
+	返回 {int: error_code, array: schools [object: {guid: id, string: friendlyname} ] }
+
+industry/industry1 [Get Method]
+	返回 {int: error_code, array: industry1 [object: {guid: id, string: friendlyname} ] }
+
+industry/industry2
+	提供属性 {guid: industry1_id}
+	返回 {int: error_code, array: industry2 [object: {guid: id, string: friendlyname} ] }
+
+city [Get Method]
+	返回 {int: error_code, array: cities [object: {guid: id, string: friendlyname} ] }
+
+
