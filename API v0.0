@@ -28,7 +28,11 @@ _
 user/signup
 	提供属性 {string: user_name, string: password}
 	返回 {int: error_code, string: user}
-	
+
+user/editpassword
+	提供属性 {string: user_name, string: password, string: newpassword}
+	返回 {int: error_code}
+
 session/create
 	提供属性 {string: user_name, string: password, guid: client}
 	返回 {int: error_code, string: user, guid: session}
@@ -47,6 +51,16 @@ user/basic_info/get
 user/basic_info/set
 	提供属性 {guid: session, string: real_name, string: mobile_phone, enum: gender, string: bio, date: birthday,
 		guid: industry1, guid: industry2, guid: city}
+	返回 {int: error_code}
+
+
+
+user/basic_info/profile_picture/{user} [Get Method]
+	返回 200/500 image?: profile_picture
+
+
+user/basic_info/profile_picture/{session} [Post Method]
+	提供属性 {image: profile_picture} // max 3MB
 	返回 {int: error_code}
 
 
@@ -86,11 +100,11 @@ activities/quit
 
 matches/activity_based
 	提供属性 {guid: session, guid: activity}
-	返回 {int: error_code, array: persons [object: {guid: user, string?: real_name} ] }
+	返回 {int: error_code, array: persons [object: {guid: user, string: real_name} ] }
 
 matches/general
 	提供属性 {guid: session}
-	返回 {int: error_code, array: persons [object: {guid: user, string?: real_name} ] }
+	返回 {int: error_code, array: persons [object: {guid: user, string: real_name} ] }
 
 
 
@@ -108,16 +122,16 @@ chat/older/all, chat/newer/all
 
 
 
-blocklist/blockees
+friendlist/friends
 	提供属性 {guid: session}
-	返回 {int: error_code, array: blockees, object: {guid: user, string: real_name} }
+	返回 {int: error_code, array: friends, object: {guid: user, string: real_name} }
 
-blocklist/block
-	提供属性 {guid: session, guid: blockee}
+friendlist/addfriend
+	提供属性 {guid: session, guid: user}
 	返回 {int: error_code}
 
-blocklist/unblock
-	提供属性 {guid: session, guid: blockee}
+friendlist/removefriend
+	提供属性 {guid: session, guid: user}
 	返回 {int: error_code}
 
 
