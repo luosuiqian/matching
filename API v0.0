@@ -44,12 +44,12 @@ session/extend
 
 user/basic_info/get
 	提供属性 {guid: session, guid: user}
-	返回 {int: error_code, string?: real_name, string?: mobile_phone, enum?: gender, string?: bio, date?: birthday,
+	返回 {int: error_code, string?: nick_name, string?: mobile_phone, enum?: gender, string?: bio, date?: birthday,
 		object?: industry {string: industry1_friendlyname, string: industry2_friendlyname},
 		object?: city {string: city_friendlyname} }
 
 user/basic_info/set
-	提供属性 {guid: session, string: real_name, string: mobile_phone, enum: gender, string: bio, date: birthday,
+	提供属性 {guid: session, string: nick_name, string: mobile_phone, enum: gender, string: bio, date: birthday,
 		guid: industry1, guid: industry2, guid: city}
 	返回 {int: error_code}
 
@@ -100,11 +100,11 @@ activities/quit
 
 matches/activity_based
 	提供属性 {guid: session, guid: activity}
-	返回 {int: error_code, array: persons [object: {guid: user, string: real_name} ] }
+	返回 {int: error_code, array: persons [object: {guid: user, string: nick_name} ] }
 
 matches/general
 	提供属性 {guid: session}
-	返回 {int: error_code, array: persons [object: {guid: user, string: real_name} ] }
+	返回 {int: error_code, array: persons [object: {guid: user, string: nick_name} ] }
 
 
 
@@ -124,7 +124,7 @@ chat/older/all, chat/newer/all
 
 friendlist/friends
 	提供属性 {guid: session}
-	返回 {int: error_code, array: friends, object: {guid: user, string: real_name} }
+	返回 {int: error_code, array: friends, object: {guid: user, string: nick_name} }
 
 friendlist/addfriend
 	提供属性 {guid: session, guid: user}
