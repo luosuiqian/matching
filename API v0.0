@@ -112,13 +112,13 @@ chat/send
 	提供属性 {guid: session, guid: to, guid: type, string: content}
 	返回 {int: error_code}
 
-chat/older/with, chat/newer/with
+chat/newer/with
 	提供属性 {guid: session, guid: with, datetime: at}
-	返回 {int: error_code, array: messages [object: {guid: id, guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
+	返回 {int: error_code, array: messages [object: {guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
 
-chat/older/all, chat/newer/all
+chat/newer/all
 	提供属性 {guid: session, datetime: at}
-	返回 {int: error_code, array: messages [object: {guid: id, guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
+	返回 {int: error_code, array: messages [object: {guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
 
 
 
