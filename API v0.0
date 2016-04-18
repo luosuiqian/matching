@@ -81,8 +81,8 @@ user/eduex/remove
 
 
 activities/all [Get Method]
-	返回 {int: error_code, array: activities [object: {guid: id, datetime: start, datetime: end, string: start_tz, string: end_tz,
-		string: title, string: location, string: description, datetime: date_created} ] }
+	返回 {int: error_code, array: activities [object: {guid: id, datetime: start, datetime: end,
+		string: title, string: location, string: description} ] }
 
 activities/mine
 	提供属性 {guid: session}
