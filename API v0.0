@@ -67,15 +67,15 @@ user/basic_info/profile_picture/{session} [Post Method]
 
 user/eduex/get
 	提供属性 {guid: session, guid: user}
-	返回 {int: error_code, array: eduex [object: {string: friendlyname,
+	返回 {int: error_code, array: eduex [object: {guid: id, string: friendlyname, guid: school,
 		string: school_friendlyname, int: entrance_year, string: comment}] }
 
 user/eduex/add
-	提供属性 {guid: session, guid: eduex, guid: school, int: entrance_year, string: comment}
+	提供属性 {guid: session, guid: id, guid: school, int: entrance_year, string: comment}
 	返回 {int: error_code}
 
 user/eduex/remove
-	提供属性 {guid: session, guid: eduex, guid: school}
+	提供属性 {guid: session, guid: id, guid: school}
 	返回 {int: error_code}
 
 
