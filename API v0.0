@@ -25,13 +25,13 @@ _
 客户端类 (所有参数为“包括，但不限于此”！)
 
 
-user/checkname
+user/check_name
 	提供属性 {string: user_name}
 	返回 {int: error_code}
 
 user/signup
 	提供属性 {string: user_name, string: password}
-	返回 {int: error_code, string: user}
+	返回 {int: error_code}
 
 user/password
 	提供属性 {guid: session, string: old_password, string: new_password}
