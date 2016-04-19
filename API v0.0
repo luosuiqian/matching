@@ -102,10 +102,6 @@ matches/activity_based
 	提供属性 {guid: session, guid: activity}
 	返回 {int: error_code, array: persons [object: {guid: user, string: nick_name} ] }
 
-matches/general
-	提供属性 {guid: session}
-	返回 {int: error_code, array: persons [object: {guid: user, string: nick_name} ] }
-
 
 
 chat/send
@@ -136,6 +132,7 @@ friendlist/removefriend
 
 
 
+//========================================= 以下不用实现 ==================================================//
 
 
 
