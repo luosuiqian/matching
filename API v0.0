@@ -25,12 +25,16 @@ _
 客户端类 (所有参数为“包括，但不限于此”！)
 
 
+user/checkname
+	提供属性 {string: user_name}
+	返回 {int: error_code}
+
 user/signup
 	提供属性 {string: user_name, string: password}
 	返回 {int: error_code, string: user}
 
-user/editpassword
-	提供属性 {string: user_name, string: password, string: newpassword}
+user/password
+	提供属性 {guid: session, string: old_password, string: new_password}
 	返回 {int: error_code}
 
 session/create
@@ -52,7 +56,6 @@ user/basic_info/set
 	提供属性 {guid: session, string: nick_name, string: mobile_phone, enum: gender, string: bio, date: birthday,
 		guid: industry1, guid: industry2, guid: city}
 	返回 {int: error_code}
-
 
 
 user/basic_info/profile_picture/{user} [Get Method]
@@ -107,10 +110,6 @@ matches/activity_based
 chat/send
 	提供属性 {guid: session, guid: to, guid: type, string: content}
 	返回 {int: error_code}
-
-chat/newer/with
-	提供属性 {guid: session, guid: with, datetime: at}
-	返回 {int: error_code, array: messages [object: {guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
 
 chat/newer/all
 	提供属性 {guid: session, datetime: at}
