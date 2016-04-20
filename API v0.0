@@ -54,7 +54,10 @@ user/basic_info/get
 
 user/basic_info/set
 	提供属性 {guid: session, string: nick_name, string: mobile_phone, enum: gender, string: bio, date: birthday,
-		guid: industry1, guid: industry2, guid: city}
+		guid: industry1, guid: industry2, guid: city,
+		PRIVACY: mobile_phone_privacy, PRIVACY: gender_privacy,
+		PRIVACY: bio_privacy, PRIVACY: birthday_privacy,
+		PRIVACY: industry2_privacy, PRIVACY: city_privacy}
 	返回 {int: error_code}
 
 
