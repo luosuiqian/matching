@@ -38,7 +38,7 @@ user/password
 	返回 {int: error_code}
 
 session/create
-	提供属性 {string: user_name, string: password, guid: client}
+	提供属性 {string: user_name, string: password, guid: client, string: push_notification}
 	返回 {int: error_code, string: user, guid: session}
 
 session/extend
