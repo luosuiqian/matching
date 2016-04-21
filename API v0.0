@@ -48,8 +48,8 @@ session/extend
 user/basic_info/get
 	提供属性 {guid: session, guid: user}
 	返回 {int: error_code, string?: nick_name, string?: mobile_phone, enum?: gender, string?: bio, date?: birthday,
-		object?: industry {string: industry1_friendlyname, string: industry2_friendlyname},
-		object?: city {string: city_friendlyname} }
+		object?: industry  {guid: industry1, guid: industry2, string: industry1_friendlyname, string: industry2_friendlyname},
+		object?: city {guid: city, string: city_friendlyname} }
 
 user/basic_info/set
 	提供属性 {guid: session, string: nick_name, string: mobile_phone, enum: gender, string: bio, date: birthday,
