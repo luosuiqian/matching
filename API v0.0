@@ -25,9 +25,6 @@ _
 客户端类 (所有参数为“包括，但不限于此”！)
 
 
-user/check_name
-	提供属性 {string: user_name}
-	返回 {int: error_code}
 
 user/signup
 	提供属性 {string: user_name, string: password}
@@ -46,6 +43,8 @@ session/extend
 	返回 {int: error_code}
 
 
+
+
 user/basic_info/get
 	提供属性 {guid: session, guid: user}
 	返回 {int: error_code, string?: nick_name, string?: mobile_phone, enum?: gender, string?: bio, date?: birthday,
@@ -58,6 +57,68 @@ user/basic_info/set
 		PRIVACY: mobile_phone_privacy, PRIVACY: gender_privacy,
 		PRIVACY: bio_privacy, PRIVACY: birthday_privacy,
 		PRIVACY: industry2_privacy, PRIVACY: city_privacy}
+	返回 {int: error_code}
+
+
+
+
+activities/all [Get Method]
+	返回 {int: error_code, array: activities [object: {guid: id, datetime: start, datetime: end,
+		string: title, string: location, string: description} ] }
+
+activities/mine
+	提供属性 {guid: session}
+	返回 {int: error_code, array: activities [object: {guid: id} ] }
+
+activities/join
+	提供属性 {guid: session, guid: activity}
+	返回 {int: error_code}
+
+activities/quit
+	提供属性 {guid: session, guid: activity}
+	返回 {int: error_code}
+
+
+
+
+matches/activity_based
+	提供属性 {guid: session, guid: activity}
+	返回 {int: error_code, array: persons [object: {guid: user, string: nick_name} ] }
+
+
+
+
+chat/send
+	提供属性 {guid: session, guid: to, guid: type, string: content}
+	返回 {int: error_code}
+
+chat/newer/all
+	提供属性 {guid: session, datetime: at}
+	返回 {int: error_code, array: messages [object: {guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
+
+
+
+
+friendlist/friends
+	提供属性 {guid: session}
+	返回 {int: error_code, array: friends, object: {guid: user, string: nick_name} }
+
+friendlist/addfriend
+	提供属性 {guid: session, guid: user}
+	返回 {int: error_code}
+
+friendlist/removefriend
+	提供属性 {guid: session, guid: user}
+	返回 {int: error_code}
+
+
+
+
+//========================================= 以下目前版本不会调用 ==================================================//
+
+
+user/check_name
+	提供属性 {string: user_name}
 	返回 {int: error_code}
 
 
@@ -84,53 +145,6 @@ user/eduex/remove
 	提供属性 {guid: session, guid: id, guid: school}
 	返回 {int: error_code}
 
-
-
-activities/all [Get Method]
-	返回 {int: error_code, array: activities [object: {guid: id, datetime: start, datetime: end,
-		string: title, string: location, string: description} ] }
-
-activities/mine
-	提供属性 {guid: session}
-	返回 {int: error_code, array: activities [object: {guid: id} ] }
-
-activities/join
-	提供属性 {guid: session, guid: activity}
-	返回 {int: error_code}
-
-activities/quit
-	提供属性 {guid: session, guid: activity}
-	返回 {int: error_code}
-
-
-
-matches/activity_based
-	提供属性 {guid: session, guid: activity}
-	返回 {int: error_code, array: persons [object: {guid: user, string: nick_name} ] }
-
-
-
-chat/send
-	提供属性 {guid: session, guid: to, guid: type, string: content}
-	返回 {int: error_code}
-
-chat/newer/all
-	提供属性 {guid: session, datetime: at}
-	返回 {int: error_code, array: messages [object: {guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
-
-
-
-friendlist/friends
-	提供属性 {guid: session}
-	返回 {int: error_code, array: friends, object: {guid: user, string: nick_name} }
-
-friendlist/addfriend
-	提供属性 {guid: session, guid: user}
-	返回 {int: error_code}
-
-friendlist/removefriend
-	提供属性 {guid: session, guid: user}
-	返回 {int: error_code}
 
 
 
