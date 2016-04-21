@@ -94,7 +94,8 @@ chat/send
 
 chat/newer/all
 	提供属性 {guid: session, datetime: at}
-	返回 {int: error_code, array: messages [object: {guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
+	提供属性 {guid: session, guid: with, guid: hint, datetime: at, int:timeout, int: pagesize }
+	返回 {int: error_code, array: messages [object: {guid: id, guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
 
 
 
