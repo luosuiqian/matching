@@ -83,11 +83,11 @@ activities/quit
 
 activities/members/older
 	提供属性 {guid: session, guid: activity; int: pagesize; datetime: at; guid?: hint}
-	返回 {int: error_code; array: persons [object: { guid: id; string: nick_name } ] }
+	返回 {int: error_code, array: users [object: {guid: id, string: nick_name} ] }
 
 matches/activity_based
 	提供属性 {guid: session, guid: activity}
-	返回 {int: error_code, array: persons [object: {guid: user, string: nick_name} ] }
+	返回 {int: error_code, array: users [object: {guid: id, string: nick_name} ] }
 
 
 
