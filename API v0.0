@@ -49,7 +49,7 @@ user/basic_info/get
 	提供属性 {guid: session, guid: user}
 	返回 {int: error_code, string?: nick_name, string?: mobile_phone, enum?: gender, string?: bio, date?: birthday,
 		object?: industry  {guid: industry1, guid: industry2, string: industry1_friendlyname, string: industry2_friendlyname},
-		object?: city {guid: city, string: city_friendlyname} }
+		object?: city {guid: id, string: friendlyname} }
 
 user/basic_info/set
 	提供属性 {guid: session, string: nick_name, string: mobile_phone, enum: gender, string: bio, date: birthday,
@@ -81,9 +81,14 @@ activities/quit
 
 
 
+activities/members/older
+	提供属性 {guid: session, guid: activity; int: pagesize; datetime: at; guid?: hint}
+	返回 {int: error_code; array: persons [object: { guid: id; string: nick_name } ] }
+
 matches/activity_based
 	提供属性 {guid: session, guid: activity}
 	返回 {int: error_code, array: persons [object: {guid: user, string: nick_name} ] }
+
 
 
 
