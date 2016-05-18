@@ -45,6 +45,12 @@ session/extend
 
 
 
+user/check_name
+	提供属性 {string: user_name}
+	返回 {int: error_code}
+
+
+
 user/basic_info/get
 	提供属性 {guid: session, guid: user}
 	返回 {int: error_code, string?: nick_name, string?: mobile_phone, enum?: gender, string?: bio, date?: birthday,
@@ -58,6 +64,17 @@ user/basic_info/set
 		PRIVACY: bio_privacy, PRIVACY: birthday_privacy,
 		PRIVACY: industry2_privacy, PRIVACY: city_privacy}
 	返回 {int: error_code}
+
+
+
+user/basic_info/profile_picture/{user} [Get Method]
+	返回 200/500 image?: profile_picture
+
+
+user/basic_info/profile_picture/{session} [Post Method]
+	提供属性 {image: profile_picture} // max 3MB
+	返回 {int: error_code}
+
 
 
 
@@ -99,8 +116,7 @@ chat/newer/all
 
 
 
-//========================================= 以下目前版本不会调用 ==================================================//
-
+//========================================= 将要实现 ==================================================//
 
 
 
@@ -124,18 +140,9 @@ matches/activity_based
 
 
 
-user/check_name
-	提供属性 {string: user_name}
-	返回 {int: error_code}
+//========================================= 以下目前不会调用 ==================================================//
 
 
-user/basic_info/profile_picture/{user} [Get Method]
-	返回 200/500 image?: profile_picture
-
-
-user/basic_info/profile_picture/{session} [Post Method]
-	提供属性 {image: profile_picture} // max 3MB
-	返回 {int: error_code}
 
 
 
