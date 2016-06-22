@@ -7,7 +7,7 @@ v0.0
 约定：用户的 screen name 的长度是 1 到 20 个字符，不能开始于空白字符、不能结束于空白字符
 约定：密码至少有 6 位
 
-//========================================= 已经实现 ==================================================//
+//========================================= 接口说明 ==================================================//
 
 user/signup
 	提供属性 {string: user_name, string: password}
@@ -78,20 +78,6 @@ chat/send
 chat/newer/all
 	提供属性 {guid: session, guid: hint, datetime: at, int: timeout, int: pagesize}
 	返回 {int: error_code, array: messages [object: {guid: id, guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
-
-//========================================= 将要实现 ==================================================//
-
-friendlist/friends
-	提供属性 {guid: session}
-	返回 {int: error_code, array: friends, object: {guid: user, string: nick_name} }
-
-friendlist/addfriend
-	提供属性 {guid: session, guid: user}
-	返回 {int: error_code}
-
-friendlist/removefriend
-	提供属性 {guid: session, guid: user}
-	返回 {int: error_code}
 
 //========================================= 错误说明 ==================================================//
 
