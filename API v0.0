@@ -25,6 +25,10 @@ session/extend
 	提供属性 {guid: session}
 	返回 {int: error_code}
 
+session/revoke
+	提供属性 {guid: user_name, string: password}
+	返回 {int: error_code}
+
 
 user/basic_info/get
 	提供属性 {guid: session, guid: user}
@@ -103,7 +107,7 @@ public const int ERRProfilePictureExceeds3MB = 16; // 用户正在上传 > 3MB �
 public const int ERRBioExceeds1024Characters = 17; // 用户简介超过 1024 个字符
 public const int ERRMobilePhoneInvalidFormat = 18; // 手机号码格式错误
 public const int ERRNickNameExceeds20Characters = 19; // 昵称超过 20 个字符
-public const int ERRClientDoesNotExist = 20; // 客户端编好不存在
+public const int ERRClientDoesNotExist = 20; // 客户端编号不存在
 public const int ERRClientDeprecated = 21; // 客户端已过时
 public const int ERRWrongCredential = 22; // 用户名或密码错误
 public const int ERRWrongRevokeParam = 23; // 撤销 session 的参数组合有误
