@@ -3,28 +3,11 @@
 v0.0
 2016.4.18
 
-
-约定：用户名长度是 4 到 20 个仅由
-A-Z
-a-z
-0-9
--_.
-构成的串，且必须开始于
-A-Z
-a-z
-_
-不能结束于
-.-
-
-约定：用户的 screen name 的长度是 1 到 20 个字符
-不能开始于空白字符、不能结束于空白字符
- 
+约定：用户名长度是 4 到 20 个仅由[A-Za-z0-9-_.]构成的串，且必须开始于[A-Za-z_]，不能结束于[.-]
+约定：用户的 screen name 的长度是 1 到 20 个字符，不能开始于空白字符、不能结束于空白字符
 约定：密码至少有 6 位
 
-
-客户端类 (所有参数为“包括，但不限于此”！)
-
-
+//========================================= 已经实现 ==================================================//
 
 user/signup
 	提供属性 {string: user_name, string: password}
@@ -35,20 +18,12 @@ user/password
 	返回 {int: error_code}
 
 session/create
-	提供属性 {string: user_name, string: password, guid: client, string: push_notification}
+	提供属性 {string: user_name, string: password, guid: client, string: push_notification} // push_notification 为设备的 deviceToken
 	返回 {int: error_code, string: user, guid: session}
 
 session/extend
 	提供属性 {guid: session}
 	返回 {int: error_code}
-
-
-
-
-user/check_name
-	提供属性 {string: user_name}
-	返回 {int: error_code}
-
 
 
 user/basic_info/get
@@ -66,17 +41,12 @@ user/basic_info/set
 	返回 {int: error_code}
 
 
-
 user/basic_info/profile_picture/{user} [Get Method]
 	返回 200/500 image?: profile_picture
-
 
 user/basic_info/profile_picture/{session} [Post Method]
 	提供属性 {image: profile_picture} // max 3MB
 	返回 {int: error_code}
-
-
-
 
 
 activities/all [Get Method]
@@ -96,13 +66,9 @@ activities/quit
 	返回 {int: error_code}
 
 
-
-
 activities/members/older
 	提供属性 {guid: session, guid: activity; int: pagesize; datetime: at; guid?: hint}
 	返回 {int: error_code, array: users [object: {guid: id, string: nick_name} ] }
-
-
 
 
 chat/send
@@ -113,12 +79,7 @@ chat/newer/all
 	提供属性 {guid: session, guid: hint, datetime: at, int: timeout, int: pagesize}
 	返回 {int: error_code, array: messages [object: {guid: id, guid: from, guid: to, guid: type, string: content, datetime: date_created} ] }
 
-
-
-
 //========================================= 将要实现 ==================================================//
-
-
 
 friendlist/friends
 	提供属性 {guid: session}
@@ -132,55 +93,45 @@ friendlist/removefriend
 	提供属性 {guid: session, guid: user}
 	返回 {int: error_code}
 
+//========================================= 错误说明 ==================================================//
 
-matches/activity_based
-	提供属性 {guid: session, guid: activity}
-	返回 {int: error_code, array: users [object: {guid: id, string: nick_name} ] }
-
-
-
-
-//========================================= 以下目前不会调用 ==================================================//
-
-
-
-
-
-user/eduex/get
-	提供属性 {guid: session, guid: user}
-	返回 {int: error_code, array: eduex [object: {guid: id, string: friendlyname, guid: school,
-		string: school_friendlyname, int: entrance_year, string: comment}] }
-
-user/eduex/add
-	提供属性 {guid: session, guid: id, guid: school, int: entrance_year, string: comment}
-	返回 {int: error_code}
-
-user/eduex/remove
-	提供属性 {guid: session, guid: id, guid: school}
-	返回 {int: error_code}
-
-
-
-
-//========================================= 以下不用实现 ==================================================//
-
-
-
-eduex/types [Get Method]
-	返回 {int: error_code, array: types [object: {guid: id, string: friendlyname} ] }
-
-eduex/schools
-	提供属性 {guid: eduex_id}
-	返回 {int: error_code, array: schools [object: {guid: id, string: friendlyname} ] }
-
-industry/industry1 [Get Method]
-	返回 {int: error_code, array: industry1 [object: {guid: id, string: friendlyname} ] }
-
-industry/industry2
-	提供属性 {guid: industry1_id}
-	返回 {int: error_code, array: industry2 [object: {guid: id, string: friendlyname} ] }
-
-city [Get Method]
-	返回 {int: error_code, array: cities [object: {guid: id, string: friendlyname} ] }
-
-
+public const int ERRDeprecated = -2; // API 已过时
+public const int ERRInternalServerInconsistenty = -1; // 内部错误
+public const int ERRSuccess = 0; // 成功
+public const int ERRParamNotParsed = 1; // 参数不正确
+public const int ERRParamInsufficient = 2; // 参数不正确
+public const int ERRUsernameDoesNotMeetPolicy = 3; // 用户名不符合要求
+public const int ERRPasswordDoesNotMeetPolicy = 4; // 密码不符合要求
+public const int ERRUsernameConflict = 5; // 用户名已存在
+public const int ERRUserHaveNoInfo = 6; // 用户没有填写信息
+public const int ERRSessionExpired = 7; // session 已经过期
+public const int ERRSessionDoesNotExist = 8; // session 不存在
+public const int ERRUserIsBlocked = 9; // 用户被 blocked
+public const int ERRReflexiveRelation = 10; // 用户在查询和自己的关系
+public const int ERRIndustry1DoesNotExist = 11; // 大行业不存在
+public const int ERRIndustry2DoesNotExist = 12; // 小行业不存在
+public const int ERRCityDoesNotExist = 13; // 城市不存在
+public const int ERRUserDoesNotExist = 14; // 用户不存在
+public const int ERRUserDoesNotHaveProfilePicture = 15; // 用户没有头像
+public const int ERRProfilePictureExceeds3MB = 16; // 用户正在上传 > 3MB 的头像
+public const int ERRBioExceeds1024Characters = 17; // 用户简介超过 1024 个字符
+public const int ERRMobilePhoneInvalidFormat = 18; // 手机号码格式错误
+public const int ERRNickNameExceeds20Characters = 19; // 昵称超过 20 个字符
+public const int ERRClientDoesNotExist = 20; // 客户端编好不存在
+public const int ERRClientDeprecated = 21; // 客户端已过时
+public const int ERRWrongCredential = 22; // 用户名或密码错误
+public const int ERRWrongRevokeParam = 23; // 撤销 session 的参数组合有误
+public const int ERRMessageTypeDoesNotExist = 24; // 消息类型不存在
+public const int ERREmptyMessage = 25; // 消息是空的
+public const int ERRMessageExceeds1024Characters = 26; // 消息超过 1024 个字符
+public const int ERRCannotSendMessageToOneself = 27; // 不可以给自己发消息
+public const int ERRTimeoutTooSmall = 28; // 超时太短
+public const int ERRTimeoutTooLarge = 29; // 超时太长
+public const int ERRPageSizeTooSmall = 30; // 分页太小
+public const int ERRPageSizeTooLarge = 31; // 分页太大
+public const int ERRNoMoreMessages = 32; // 没有更多消息了
+public const int ERRNoActivities = 33; // 没有活动
+public const int ERRActivityDoesNotExist = 34; // 活动不存在
+public const int ERRAlreadyJoined = 35; // 已经加入过活动
+public const int ERRNotJoined = 36; // 没有加入过活动
+public const int ERRNoMoreUsers = 37; // 没有更多用户了
